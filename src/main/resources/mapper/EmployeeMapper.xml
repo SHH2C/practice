@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cj.one.dao.EmployeeMapper">
+    <select id="selectEmployee" resultType="com.cj.one.entity.po.EmployeePo">
+        select
+              employee_id,
+              employee_name,
+              employee_status,
+              employee_rank,
+              employee_password
+        from  uxin_employee
+        where
+              employee_username = #{employeeUsername}
+              and employee_status=1
+    </select>
+    <insert id="insertEmployee">
+        insert into uxin_employee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employeeName!=null and employeeName!=''">
+                employee_name,
+            </if>
+            <if test="employeeSex!=null and employeeSex!=''">
+                employee_sex,
+            </if>
+            <if test="employeePhone!=null and employeePhone!=''">
+                employee_phone,
+            </if>
+            <if test="employeeIdCard!=null and employeeIdCard!=''">
+                employee_id_card,
+            </if>
+            <if test="employeeBirthday!=null and employeeBirthday!=''">
+                employee_birthday,
+            </if>
+            <if test="incompanyDay!=null and incompanyDay!=''">
+                incompany_day,
+            </if>
+            <if test="employeeAddress!=null and employeeAddress!=''">
+                employee_address,
+            </if>
+            <if test="wechatId!=null and wechatId!=''">
+                wechat_id,
+            </if>
+            <if test="emergencyContact!=null and emergencyContact!=''">
+                emergency_contact,
+            </if>
+            <if test="emergencyContactPhone!=null and emergencyContactPhone!=''">
+                emergency_contact_phone,
+            </if>
+
+            <if test="employeeUsername!=null and employeeUsername!=''">
+                employee_username,
+            </if>
+            <if test="employeePassword!=null and employeePassword!=''">
+                employee_password,
+            </if>
+            created_at,
+            updated_at
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employeeName!=null and employeeName!=''">
+                #{employeeName},
+            </if>
+            <if test="employeeSex!=null and employeeSex!=''">
+                #{employeeSex},
+            </if>
+            <if test="employeePhone!=null and employeePhone!=''">
+                #{employeePhone},
+            </if>
+            <if test="employeeIdCard!=null and employeeIdCard!=''">
+                #{employeeIdCard},
+            </if>
+            <if test="employeeBirthday!=null and employeeBirthday!=''">
+                #{employeeBirthday},
+            </if>
+            <if test="incompanyDay!=null and incompanyDay!=''">
+                #{incompanyDay},
+            </if>
+            <if test="employeeAddress!=null and employeeAddress!=''">
+                #{employeeAddress},
+            </if>
+            <if test="wechatId!=null and wechatId!=''">
+                #{wechatId},
+            </if>
+
+            <if test="emergencyContact!=null and emergencyContact!=''">
+                #{emergencyContact},
+            </if>
+            <if test="emergencyContactPhone!=null and emergencyContactPhone!=''">
+                #{emergencyContactPhone},
+            </if>
+
+            <if test="employeeUsername!=null and employeeUsername!=''">
+                #{employeeUsername},
+            </if>
+            <if test="employeePassword!=null and employeePassword!=''">
+                #{employeePassword},
+            </if>
+            now(),
+            now()
+        </trim>
+    </insert>
+    <update id="updateEmployee">
+        update uxin_employee
+        <set>
+            <if test="employeeName!=null and employeeName!=''">
+                employee_name=#{employeeName},
+            </if>
+            <if test="employeeSex!=null and employeeSex!=''">
+                employee_sex=#{employeeSex},
+            </if>
+            <if test="employeePhone!=null and employeePhone!=''">
+                employee_Phone=#{employeePhone},
+            </if>
+            <if test="employeeIdCard!=null and employeeIdCard!=''">
+                employee_id_card=#{employeeIdCard},
+            </if>
+            <if test="incompanyDay!=null and incompanyDay!=''">
+                incompany_day=#{incompanyDay},
+            </if>
+            <if test="employeeAddress!=null and employeeAddress!=''">
+                employee_address=#{employeeAddress},
+            </if>
+            <if test="wechatId!=null and wechatId!=''">
+                wechat_id=#{wechatId},
+            </if>
+            <if test="emergencyContact!=null and emergencyContact!=''">
+                emergency_contact=#{emergencyContact},
+            </if>
+            <if test="emergencyContactPhone!=null and emergencyContactPhone!=''">
+                emergency_contact_phone=#{emergencyContactPhone},
+            </if>
+            <if test="employeeStatus!=null and employeeStatus!=''">
+                employee_status=#{employeeStatus},
+            </if>
+            updated_at=now()
+
+        </set>
+        where
+        employee_id=#{employeeId}
+    </update>
+    <select id="listEmployee" resultType="com.cj.one.entity.po.EmployeePo">
+        select
+        employee_id,
+        employee_name,
+        employee_sex,
+        employee_phone,
+        employee_id_card,
+        incompany_day,
+        employee_address,
+        wechat_id,
+        emergency_contact,
+        emergency_contact_phone,
+        employee_status
+        from
+        uxin_employee
+        <where>
+            <if test="employeeName!=null and employeeName!=''">
+                employee_name like concat('%',#{employeeName},'%')
+            </if>
+            <if test="employeeSex!=null and employeeSex!=''">
+                and employee_sex=#{employeeSex}
+            </if>
+            <if test="employeePhone!=null and employeePhone!=''">
+                and employee_phone=#{employeePhone}
+            </if>
+            <if test="employeeIdCard!=null and employeeIdCard!=''">
+                and employee_id_card=#{employeeIdCard}
+            </if>
+            <if test="incompanyDay!=null and incompanyDay!=''">
+                and incompany_day=#{incompanyDay}
+            </if>
+            <if test="employeeAddress!=null and employeeAddress!=''">
+                and employee_address=#{employeeAddress}
+            </if>
+            <if test="wechatId!=null and wechatId!=''">
+                and wechat_id=#{wechatId}
+            </if>
+            <if test="emergencyContact!=null and emergencyContact!=''">
+                and emergency_contact=#{emergencyContact}
+            </if>
+            <if test="emergencyContactPhone!=null and emergencyContactPhone!=''">
+                and emergency_contact_phone=#{emergencyContactPhone}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" parameterType="Integer" resultType="com.cj.one.entity.po.EmployeePo">
+        select
+
+            employee_name,
+            employee_sex,
+            employee_phone,
+            employee_id_card,
+            incompany_day,
+            employee_address,
+            wechat_id,
+            emergency_contact,
+            emergency_contact_phone,
+            employee_status
+        from
+            uxin_employee
+        where
+            employee_id=#{employeeId}
+    </select>
+</mapper>
